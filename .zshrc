@@ -3,10 +3,6 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-export CLASSPATH=".:/usr/local/lib/antlr-4.8-complete.jar:$CLASSPATH"
-alias antlr4='java -jar /usr/local/lib/antlr-4.8-complete.jar'
-alias grun='java org.antlr.v4.gui.TestRig'
-
 # Path to your oh-my-zsh installation.
 export ZSH="/home/jakob/.oh-my-zsh"
 # Set name of the theme to load --- if set to "random", it will
@@ -104,3 +100,9 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias make='colormake'
+alias ls='ls --color=always'
+alias diff='colordiff'
+alias tree="tree -C"
+alias grep='grep --color=auto'
+alias ping='prettyping'
