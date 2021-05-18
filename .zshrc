@@ -106,3 +106,4 @@ alias diff='colordiff'
 alias tree="tree -C"
 alias grep='grep --color=auto'
 alias ping='prettyping'
+alias ssh='TERM=xterm-256color \ssh'
