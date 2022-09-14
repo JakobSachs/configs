@@ -1,10 +1,11 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+ [ -d /home/linuxbrew/.linuxbrew ] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+export PATH=/snap/bin:/usr/local/bin:/usr/local/go/bin:$HOME/.local/bin:/home/linuxbrew/.linuxbrew/bin:$PATH:$HOME/go/bin:/home/jakobs/Software/julia
 
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
+export GOPATH="/home/jakobs/go"
 # Path to your oh-my-zsh installation.
-export ZSH="/home/jakob/.oh-my-zsh"
+export ZSH="/home/jakobs/.oh-my-zsh"
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -70,7 +71,7 @@ HIST_STAMPS="dd.mm.yyyy"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git ubuntu catimg vscode pip docker colored-man-pages safe-paste screen colorize chucknorris sudo web-search zsh_reload)
+plugins=(git catimg vscode pip docker colored-man-pages safe-paste screen colorize chucknorris sudo web-search npm nmap ufw)
 #ZSH_COLORIZE_STYLE="colorful"
 source $ZSH/oh-my-zsh.sh
 
@@ -100,10 +101,6 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias make='colormake'
-alias ls='ls --color=always'
-alias diff='colordiff'
-alias tree="tree -C"
-alias grep='grep --color=auto'
-alias ping='prettyping'
-alias ssh='TERM=xterm-256color \ssh'
+alias ping="prettyping --nolegend"
+alias make="colormake"
+#alias ssh="kitty +kitten ssh"
