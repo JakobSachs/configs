@@ -40,6 +40,9 @@ set softtabstop=2
 set expandtab
 set noshiftround
 
+" wrap
+set nowrap
+
 " Cursor motion
 set scrolloff=5
 
