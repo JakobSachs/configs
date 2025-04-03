@@ -33,6 +33,7 @@ set visualbell
 set encoding=utf-8
 
 " Whitespace
+set smartindent
 set formatoptions=tcqrn1
 set tabstop=2
 set shiftwidth=2
