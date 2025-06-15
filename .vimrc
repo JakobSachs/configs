@@ -124,6 +124,8 @@ function! FormatFile()
         let l:output = system('black ' . expand('%'))
     elseif l:ft == 'c' || l:ft == 'cpp'
         let l:output = system('clang-format -i ' . expand('%'))
+    elseif l:ft == 'go'
+        let l:output = system('go fmt ' . expand('%'))
     else
         echo "No formatter configured for filetype: " . l:ft
         return
