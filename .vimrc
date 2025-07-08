@@ -1,4 +1,3 @@
-
 " -- basics --
 " Don't try to be vi compatible
 set nocompatible
@@ -47,7 +46,6 @@ set nowrap
 " Cursor motion
 set scrolloff=5
 
-
 " Allow hidden buffers
 set hidden
 
@@ -78,13 +76,9 @@ let g:solarized_termtrans=1
 " -- netrw options -- 
 " Remove the banner at the top
 let g:netrw_banner = 0
-
-" Tree view style
 let g:netrw_liststyle = 3
-
-" open in new tab
-let g:netrw_browse_split = 3
-
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
 
 " -- remaps -- 
 
@@ -192,3 +186,73 @@ endfunction
 "  Ctrl-C for both normal and visual mode
 nnoremap <C-c> :call ToggleComment()<CR>
 vnoremap <C-c> :call ToggleComment()<CR>
+
+set path+=**
+set wildmenu
+
+" -- LSP Configuration (Neovim only) --
+if has('nvim')
+    " Start a lua block
+    lua << EOF
+        -- Python Language Server (ruff)
+        vim.lsp.config('pyright', {
+          cmd = { 'pyright-langserver','--stdio' },
+          filetypes = { 'python' },
+          root_markers = { 'pyproject.toml', 'setup.py', 'setup.cfg', 'requirements.txt', '.git' },
+          settings = {
+            python = {
+              analysis = {
+                autoSearchPaths = true,
+                useLibraryCodeForTypes = true,
+                diagnosticMode = 'workspace',
+                typeCheckingMode = 'basic', -- or 'strict'
+                autoImportCompletions = true,
+              },
+            },
+          },
+        })
+
+        -- Enable the LSP
+        vim.lsp.enable('pyright')
+
+        -- Generic LSP setup options that apply to all servers
+        vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+            vim.lsp.diagnostic.on_publish_diagnostics, {
+                virtual_text = false,
+                signs = true,
+                update_in_insert = false,
+            }
+        )
+
+        vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+            vim.lsp.handlers.hover, {
+                border = "single"
+            }
+        )
+
+        vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
+            vim.lsp.handlers.signature_help, {
+                border = "single"
+            }
+        )
+        local opts = { noremap=true, silent=true }
+
+        -- keybinds (TODO: make proper)
+        vim.api.nvim_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+        vim.api.nvim_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+        vim.api.nvim_set_keymap('n', 'gds', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+        vim.api.nvim_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+        vim.api.nvim_set_keymap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+        vim.api.nvim_set_keymap('n', '<leader>cf', '<cmd>lua vim.lsp.buf.format({async = true})<CR>', opts)
+        vim.api.nvim_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+        vim.api.nvim_set_keymap('i', '<C-S-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+        vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+        vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+        vim.api.nvim_set_keymap('n', '<leader>dl', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+        vim.api.nvim_set_keymap('n', '<leader>dw', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+        vim.api.nvim_set_keymap('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+        vim.api.nvim_set_keymap('v', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+EOF
+endif
+
+inoremap <silent> <C-Space> <C-X><C-O>
