@@ -67,6 +67,7 @@ set smartcase
 set showmatch
 
 " Color scheme settings
+colorscheme habamax
 set t_Co=256
 set background=dark
 let g:solarized_termcolors=256
@@ -98,14 +99,6 @@ vnoremap <leader>p "+p
 " next and previous tab
 nnoremap gn :tabnext<CR>
 nnoremap gp :tabprevious<CR>
-
-" space-f for ex
-nnoremap <leader>f :Explore<CR>
-" use space-q to exit ex
-augroup netrw_mapping
-  autocmd!
-  autocmd filetype netrw nmap <buffer> <leader>q :bd<CR>
-augroup END
 
 " -- custom cmds --
 " Create the Fmt command
@@ -211,14 +204,25 @@ if has('nvim')
             },
           },
         })
+        vim.lsp.config('clangd', {
+          cmd = { 'clangd' },
+          filetypes = { 'c', 'cpp', 'objc', 'objcpp' },
+          root_markers = {
+            'compile_commands.json',
+            'compile_flags.txt',
+            '.clangd',
+            '.git',
+          },
 
-        -- Enable the LSP
+        })
+
+        -- Enable the LSPs
         vim.lsp.enable('pyright')
+        vim.lsp.enable('clangd')
 
         -- Generic LSP setup options that apply to all servers
         vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
             vim.lsp.diagnostic.on_publish_diagnostics, {
-                virtual_text = false,
                 signs = true,
                 update_in_insert = false,
             }
@@ -239,19 +243,29 @@ if has('nvim')
 
         -- keybinds (TODO: make proper)
         vim.api.nvim_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-        vim.api.nvim_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-        vim.api.nvim_set_keymap('n', 'gds', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
         vim.api.nvim_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
         vim.api.nvim_set_keymap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-        vim.api.nvim_set_keymap('n', '<leader>cf', '<cmd>lua vim.lsp.buf.format({async = true})<CR>', opts)
         vim.api.nvim_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-        vim.api.nvim_set_keymap('i', '<C-S-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-        vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-        vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-        vim.api.nvim_set_keymap('n', '<leader>dl', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-        vim.api.nvim_set_keymap('n', '<leader>dw', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-        vim.api.nvim_set_keymap('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-        vim.api.nvim_set_keymap('v', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+        vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+        vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+        vim.api.nvim_set_keymap('n', '<leader>dl', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+EOF
+endif
+
+" vim.pack  plugins
+if has('nvim')
+    lua << EOF
+    vim.pack.add({
+      'https://github.com/nvim-lua/plenary.nvim'
+    })
+    vim.pack.add({
+      'https://github.com/nvim-telescope/telescope.nvim'
+    })
+
+    -- telescope setup
+    local builtin = require('telescope.builtin')
+    vim.keymap.set('n', '<leader>f', builtin.find_files, { desc = 'Telescope find files' })
+    vim.keymap.set('n', '<leader>g', builtin.live_grep, { desc = 'Telescope live grep' })
 EOF
 endif
 
