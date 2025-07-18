@@ -108,7 +108,7 @@ command! Fmt call FormatFile()
 function! FormatFile()
     let l:ft = &filetype
     if l:ft == 'python'
-        let l:output = system('black ' . expand('%'))
+        let l:output = system('uvx black ' . expand('%'))
     elseif l:ft == 'c' || l:ft == 'cpp'
         let l:output = system('clang-format -i ' . expand('%'))
     elseif l:ft == 'go'
