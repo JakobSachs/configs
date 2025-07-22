@@ -261,6 +261,12 @@ if has('nvim')
     vim.pack.add({
       'https://github.com/nvim-telescope/telescope.nvim'
     })
+    -- vim.pack.add({
+    --   'https://github.com/JakobSachs/ollama-complete'
+    -- })
+
+    -- require("ollama-complete").setup()
+    -- require("ollama-complete.config").setup({debug=false,prefix_window=150,suffix_window=50})
 
     -- telescope setup
     local builtin = require('telescope.builtin')
