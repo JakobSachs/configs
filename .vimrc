@@ -67,7 +67,7 @@ set smartcase
 set showmatch
 
 " Color scheme settings
-colorscheme habamax
+colorscheme retrobox
 set t_Co=256
 set background=dark
 let g:solarized_termcolors=256
@@ -113,6 +113,8 @@ function! FormatFile()
         let l:output = system('clang-format -i ' . expand('%'))
     elseif l:ft == 'go'
         let l:output = system('go fmt ' . expand('%'))
+    elseif l:ft == 'rust'
+        let l:output = system('cargo fmt')
     else
         echo "No formatter configured for filetype: " . l:ft
         return
@@ -213,12 +215,26 @@ if has('nvim')
             '.clangd',
             '.git',
           },
+        })
 
+        
+        vim.lsp.config('rust-analyzer', {
+          cmd = { 'rust-analyzer' },
+          filetypes = {'rust'},
+          root_markers = { "Cargo.toml" },
+          settings = {
+            ["rust-analyzer"] = {
+              checkOnSave = {
+                command = 'clippy', -- You can use 'check' or 'clippy'
+              },
+            }
+          },
         })
 
         -- Enable the LSPs
         vim.lsp.enable('pyright')
         vim.lsp.enable('clangd')
+        vim.lsp.enable('rust-analyzer')
 
         -- Generic LSP setup options that apply to all servers
         vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
