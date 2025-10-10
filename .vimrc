@@ -230,11 +230,16 @@ if has('nvim')
             }
           },
         })
+        vim.lsp.config('zls', {
+          cmd = { 'zls' },
+          filetypes = { 'zig' },
+        })
 
         -- Enable the LSPs
         vim.lsp.enable('pyright')
         vim.lsp.enable('clangd')
         vim.lsp.enable('rust-analyzer')
+        vim.lsp.enable('zls')
 
         -- Generic LSP setup options that apply to all servers
         vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
