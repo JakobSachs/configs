@@ -1,6 +1,7 @@
-if set -q ZELLIJ
-else
-    zellij
+if not set -q ZELLIJ
+    if test -t 1
+        exec zellij
+    end
 end
 
 source ~/.config/fish/themes/tokyonight_day.fish
