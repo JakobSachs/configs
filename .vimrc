@@ -67,7 +67,7 @@ set smartcase
 set showmatch
 
 " Color scheme settings
-colorscheme retrobox
+" colorscheme retrobox
 set t_Co=256
 set background=dark
 let g:solarized_termcolors=256
@@ -143,7 +143,8 @@ function! ToggleComment() range
         \ 'rust': '//',
         \ 'go': '//',
         \ 'lua': '--',
-        \ 'sql': '--'
+        \ 'sql': '--',
+        \ 'lisp': ';;'
         \ }
 
     let l:ft = &filetype
