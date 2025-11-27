@@ -292,9 +292,8 @@ if has('nvim')
     vim.keymap.set('n', '<leader>f', builtin.find_files, { desc = 'Telescope find files' })
     vim.keymap.set('n', '<leader>g', builtin.live_grep, { desc = 'Telescope live grep' })
 
-    vim.filetype.add {
-      extension = { jl = "lisp" },
-    }
+    vim.filetype.add({ extension = { jl = "lisp" }, })
+    vim.filetype.add({ extension = { hy = "lisp", }, })
 EOF
 endif
 
