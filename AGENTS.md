@@ -1,5 +1,21 @@
 # Global instructions
 
+If there is documentation for the project, always remember to update this.
+
+
+## Git
+When asked to commit your changes, use the conventional-commit format. So the first line should follow these examples:
+
+```
+feat: a new feature
+fix: fixed a bug
+refactor: code-changes mostly invisible to the user/consumer
+chore: everything else, project structure/CI related
+```
+For large changes, append a bulletpoint list of the changes to the message.
+
+We often use pre-commit hooks for many of the below listed tools.
+
 ## Code Philosophy 
 Every line must earn its keep. Prefer readability over cleverness. We believe that if carefully designed, 10 lines can have the impact of 1000.
 
