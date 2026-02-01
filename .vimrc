@@ -115,6 +115,8 @@ function! FormatFile()
         let l:output = system('go fmt ' . expand('%'))
     elseif l:ft == 'rust'
         let l:output = system('cargo fmt')
+    elseif l:ft == 'typst'
+        let l:output = system('typstyle -i ' . expand('%'))
     else
         echo "No formatter configured for filetype: " . l:ft
         return
