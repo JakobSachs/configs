@@ -41,6 +41,8 @@ All the basic cargo tools:
 - cargo fmt: For formatting
 - cargo test: For running tests
 - cargo doc: For building documentation
+- cargo clippy: For linting
+- cargo run/build: For execution
 
 ## Language specific instructions:
 
