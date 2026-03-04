@@ -290,8 +290,9 @@ if has('nvim')
     })
 
     vim.pack.add({
-      'https://github.com/supermaven-inc/supermaven-nvim'
+      'https://github.com/lewis6991/gitsigns.nvim'
     })
+
 
     -- telescope setup
     local builtin = require('telescope.builtin')
@@ -300,9 +301,6 @@ if has('nvim')
 
     vim.filetype.add({ extension = { jl = "lisp" }, })
     vim.filetype.add({ extension = { hy = "lisp", }, })
-
-    -- supermaven setup
-    require('supermaven-nvim').setup({})
 EOF
 endif
 

@@ -23,5 +23,8 @@ end
 
 
 
+# less pager
+set -x LESS "-RFiMg"
+
 # opencode
 fish_add_path /home/jakob/.opencode/bin
