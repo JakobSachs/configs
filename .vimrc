@@ -245,24 +245,13 @@ if has('nvim')
         vim.lsp.enable('zls')
 
         -- Generic LSP setup options that apply to all servers
-        vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-            vim.lsp.diagnostic.on_publish_diagnostics, {
-                signs = true,
-                update_in_insert = false,
-            }
-        )
+        vim.diagnostic.config({
+            signs = true,
+            update_in_insert = false,
+        })
 
-        vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-            vim.lsp.handlers.hover, {
-                border = "single"
-            }
-        )
-
-        vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-            vim.lsp.handlers.signature_help, {
-                border = "single"
-            }
-        )
+        -- Border for all LSP floating windows (hover, signature help, etc.)
+        vim.o.winborder = "single"
         local opts = { noremap=true, silent=true }
 
         -- keybinds (TODO: make proper)
@@ -270,8 +259,8 @@ if has('nvim')
         vim.api.nvim_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
         vim.api.nvim_set_keymap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
         vim.api.nvim_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-        vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-        vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+        vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.jump({count=-1})<CR>', opts)
+        vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.jump({count=1})<CR>', opts)
         vim.api.nvim_set_keymap('n', '<leader>dl', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
 EOF
 endif
@@ -293,6 +282,8 @@ if has('nvim')
       'https://github.com/lewis6991/gitsigns.nvim'
     })
 
+    vim.pack.add({"https://github.com/EdenEast/nightfox.nvim"})
+
 
     -- telescope setup
     local builtin = require('telescope.builtin')
@@ -301,6 +292,8 @@ if has('nvim')
 
     vim.filetype.add({ extension = { jl = "lisp" }, })
     vim.filetype.add({ extension = { hy = "lisp", }, })
+    
+    vim.cmd("colorscheme terafox")
 EOF
 endif
 
