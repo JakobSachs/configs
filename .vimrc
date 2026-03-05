@@ -283,6 +283,7 @@ if has('nvim')
     })
 
     vim.pack.add({"https://github.com/EdenEast/nightfox.nvim"})
+    vim.pack.add({"https://github.com/tpope/vim-fugitive"})
 
 
     -- telescope setup
