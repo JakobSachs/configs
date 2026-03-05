@@ -293,6 +293,9 @@ if has('nvim')
     vim.filetype.add({ extension = { jl = "lisp" }, })
     vim.filetype.add({ extension = { hy = "lisp", }, })
     
+
+    require('gitsigns').setup({ current_line_blame = true })
+
     vim.cmd("colorscheme terafox")
 EOF
 endif

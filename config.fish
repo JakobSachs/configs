@@ -6,7 +6,6 @@ if not set -q ZELLIJ
         end
     end
 end
-source ~/.config/fish/themes/tokyonight_day.fish
 
 # aliases
 function gcm --wraps='git commit -m' --description 'alias gcm git commit -m'
@@ -28,3 +27,6 @@ set -x LESS "-RFiMg"
 
 # opencode
 fish_add_path /home/jakob/.opencode/bin
+
+
+ starship init fish | source
