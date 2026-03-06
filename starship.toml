@@ -3,9 +3,11 @@
 right_format = '$time'
 
 [aws]
+disabled = true
 format = '\[[$symbol($profile)(\($region\))(\[$duration\])]($style)\]'
 
 [azure]
+disabled = true
 format = '\[[$symbol($subscription)]($style)\]'
 
 [battery]
@@ -81,6 +83,7 @@ format = '\[[$symbol$branch]($style)\]'
 format = '\[[+$added]($added_style)\]\[[-$deleted]($deleted_style)\]'
 
 [gcloud]
+disabled = true
 format = '\[[$symbol$account(@$domain)(\($region\))]($style)\]'
 
 [git_branch]
@@ -210,6 +213,9 @@ format = '\[[$symbol$stack]($style)\]'
 format = '\[[$symbol($version)]($style)\]'
 
 [python]
+detect_extensions = []
+detect_files = ['pyproject.toml', 'requirements.txt', 'Pipfile', 'setup.py', 'setup.cfg', '.python-version']
+detect_folders = ['.venv', 'venv']
 format = '\[[${symbol}${pyenv_prefix}(${version})(\($virtualenv\))]($style)\]'
 
 [quarto]
