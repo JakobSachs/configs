@@ -13,7 +13,7 @@ chore: everything else, project structure/CI related
 ```
 For large changes, append a bulletpoint list of changes to the message.
 
-We often use pre-commit hooks, don't EVER Skip these.
+We often use pre-commit hooks for many of the below listed tools. (sometimes `prek`)
 
 ## Code Philosophy 
 Every line must earn its keep. Prefer readability over cleverness. We believe that if carefully designed, 10 lines can have the impact of 1000.
@@ -21,6 +21,12 @@ Every line must earn its keep. Prefer readability over cleverness. We believe th
 Never mix functionality changes with white-space changes. All functionality changes must be tested.
 
 For writing tests, never test implementation, test expected functionality 
+
+Dont EVER use emojis in almost anything.
+
+For scripts/documentation and simliar things, you should copy the plain style most conventional UNIX/Linux tools have, no flowery language.
+
+I try to document everything in my personal notes, so if we are talking about something interesting, remind me to write it down (only if its highly relevant).
 
 ## Tools
 
