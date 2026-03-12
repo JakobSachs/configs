@@ -290,6 +290,7 @@ if has('nvim')
     local builtin = require('telescope.builtin')
     vim.keymap.set('n', '<leader>f', builtin.find_files, { desc = 'Telescope find files' })
     vim.keymap.set('n', '<leader>g', builtin.live_grep, { desc = 'Telescope live grep' })
+    vim.keymap.set('n', '<leader>c', builtin.git_status, { desc = 'Telescope git status' })
 
     vim.filetype.add({ extension = { jl = "lisp" }, })
     vim.filetype.add({ extension = { hy = "lisp", }, })
