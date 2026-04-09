@@ -283,6 +283,7 @@ if has('nvim')
     })
 
     vim.pack.add({"https://github.com/EdenEast/nightfox.nvim"})
+
     vim.pack.add({"https://github.com/tpope/vim-fugitive"})
 
 
@@ -291,6 +292,7 @@ if has('nvim')
     vim.keymap.set('n', '<leader>f', builtin.find_files, { desc = 'Telescope find files' })
     vim.keymap.set('n', '<leader>g', builtin.live_grep, { desc = 'Telescope live grep' })
     vim.keymap.set('n', '<leader>c', builtin.git_status, { desc = 'Telescope git status' })
+    vim.keymap.set('n', '<leader>k', builtin.keymaps, { desc = 'Telescope show keymaps' })
 
     vim.filetype.add({ extension = { jl = "lisp" }, })
     vim.filetype.add({ extension = { hy = "lisp", }, })
